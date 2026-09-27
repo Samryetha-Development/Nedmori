@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Node / Vite (project-specific)
+node_modules/
+.deps/
+dist/
+coverage/
+
+# Local submission data
+backend/data/submissions.json

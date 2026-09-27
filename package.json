@@ -1,0 +1,35 @@
+{
+  "name": "nedmori-oj",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local React OJ interface built with @lako/ui",
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "node dev.mjs",
+    "dev:web": "vite --host 127.0.0.1 --port 3000 --strictPort",
+    "dev:api": "node backend/server.mjs",
+    "start": "npm run dev",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
+    "check": "tsc --noEmit",
+    "test": "vitest run && node --test backend/server.test.mjs"
+  },
+  "dependencies": {
+    "@lako/ui": "file:vendor/lako-ui-0.1.0.tgz",
+    "@shikijs/markdown-it": "^4.4.3",
+    "katex": "^0.18.9",
+    "markdown-it": "^15.0.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.3",
+    "vite": "8.2.2",
+    "vitest": "^4.1.0"
+  }
+}
