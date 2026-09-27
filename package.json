@@ -8,12 +8,13 @@
   "scripts": {
     "dev": "node dev.mjs",
     "dev:web": "vite --host 127.0.0.1 --port 3000 --strictPort",
-    "dev:api": "node backend/server.mjs",
+    "dev:api": "cd backend && uv run uvicorn main:app --host 127.0.0.1 --port 8787",
     "start": "npm run dev",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
     "check": "tsc --noEmit",
-    "test": "vitest run && node --test backend/server.test.mjs"
+    "test": "vitest run",
+    "test:api": "cd backend && uv run pytest"
   },
   "dependencies": {
     "@lako/ui": "file:vendor/lako-ui-0.1.0.tgz",

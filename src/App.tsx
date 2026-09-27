@@ -7,6 +7,7 @@ import {
 } from '@lako/ui/components';
 import { icons, problems, contests, users, seedSubmissions, templates } from './data';
 import { editIndent, formatSubmissionDate, matchesProblemQuery, submissionStatus } from './behavior';
+import { renderProblem } from './markdown';
 
 type Problem = typeof problems[number];
 type Language = keyof typeof templates;
@@ -383,13 +384,12 @@ function Statement({ p }: { p: Problem }) {
   const [rendered, setRendered] = useState<string | null>(null);
   const [copiedSample, setCopiedSample] = useState('');
   useEffect(() => {
-    const controller = new AbortController();
+    let active = true;
     setRendered(null);
-    fetch(`/api/problems/${p.id}/rendered`, { signal: controller.signal })
-      .then(response => response.ok ? response.json() : Promise.reject(new Error('render failed')))
-      .then(data => setRendered(typeof data.html === 'string' ? data.html : null))
-      .catch(error => { if (error.name !== 'AbortError') setRendered(null); });
-    return () => controller.abort();
+    renderProblem(p)
+      .then(result => { if (active) setRendered(result.html); })
+      .catch(() => { if (active) setRendered(null); });
+    return () => { active = false; };
   }, [p.id]);
   const copy = async (text: string, sample = '', button?: HTMLButtonElement) => {
     const original = button?.textContent || '复制';

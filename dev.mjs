@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 
-const api = spawn(process.execPath, ['backend/server.mjs'], { stdio: 'inherit' });
+const api = spawn('uv', ['run', 'uvicorn', 'main:app', '--host', '127.0.0.1', '--port', '8787'], { stdio: 'inherit', cwd: 'backend' });
 const vite = spawn(process.execPath, [process.env.npm_execpath, 'exec', 'vite', '--host', '127.0.0.1', '--port', '3000', '--strictPort'], { stdio: 'inherit' });
 const children = [api, vite];
 const stop = signal => { for (const child of children) if (!child.killed) child.kill(signal); };

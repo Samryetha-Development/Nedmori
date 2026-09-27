@@ -2,7 +2,7 @@
 
 按照用户提供的 Samryetha Interface Guidelines 制作的中文 OJ。界面控件使用 [@lako/ui](https://github.com/Samryetha-Development/lako-ui) 的 React 组件。
 
-题面由本地 Node API 使用 markdown-it 渲染，KaTeX 处理数学公式，Shiki 在服务端生成代码高亮 HTML。
+题面在浏览器端使用 markdown-it 渲染，KaTeX 处理数学公式，Shiki 生成代码高亮 HTML。后端是 FastAPI + SQLModel 服务，只做校验与存储。
 
 ## 本地预览
 
@@ -13,21 +13,26 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-然后访问 `http://127.0.0.1:3000`。源码直接放在当前项目根目录，仅本地运行。
+然后访问 `http://127.0.0.1:3000`。需要 Node 20+ 与 [uv](https://docs.astral.sh/uv/)（首次运行时会自动创建 `backend/.venv`）。源码直接放在当前项目根目录，仅本地运行。
 
 生产构建使用 `pnpm build`，类型检查使用 `pnpm check`。
 
 ## 已实现
 
 - 题库：16 道完整示例题、搜索、难度与算法筛选、分页、随机题、收藏。
-- 题目工作台：Markdown / LaTeX / 服务端代码高亮题面、C++ / Python / Java 代码输入、按题目与语言保存草稿、下载、重置、提交记录。
+- 题目工作台：Markdown / LaTeX / 代码高亮题面、C++ / Python / Java 代码输入、按题目与语言保存草稿、下载、重置、提交记录。
 - 比赛列表、比赛详情、本机演示报名和赛后练习入口。
 - 提交记录、源代码详情、按积分或题数排序的示例榜单。
 - 浅色 / 深色 / 跟随系统，键盘可操作的 Lako Tabs、Dialog、Dropdown、Notification、移动导航与减弱动效。
 
 ## 明确边界
 
-项目包含一个本地 Node.js API，提供题目读取、提交创建、提交历史和健康检查，并将提交持久化到 `backend/data/submissions.json`。编译器、判题沙箱和登录尚未接入；榜单、用户统计、比赛和 Accepted / Wrong Answer 仍为标注过的示例数据。API 不可用时，代码会降级暂存到当前浏览器，避免草稿丢失。
+后端是 `backend/` 下的 FastAPI + SQLModel 服务（Python ≥ 3.13，依赖用 uv 管理），提供提交创建、提交列表和健康检查，并把提交持久化到 `backend/data/nedmori.db`。编译器、判题沙箱和登录尚未接入；榜单、用户统计、比赛和 Accepted / Wrong Answer 仍为标注过的示例数据。API 不可用时，代码会降级暂存到当前浏览器，避免草稿丢失。
+
+```powershell
+cd backend && uv run pytest   # 后端测试
+pnpm test:api                 # 同上
+```
 
 `pnpm dev` 会同时启动网页 `http://127.0.0.1:3000` 和 API `http://127.0.0.1:8787`。可使用 `pnpm dev:web` 或 `pnpm dev:api` 单独启动。
 
@@ -51,6 +56,8 @@ pnpm dev
 - `src/App.tsx`：页面、hash 路由、业务交互与本机保存。
 - `src/data.js`：题目、比赛和排行榜示例数据。
 - `src/integration.css`：OJ 布局对 Lako 组件的适配。
-- `backend/markdown.mjs`：Markdown、KaTeX 与 Shiki 服务端题面渲染。
+- `src/markdown.js`：Markdown、KaTeX 与 Shiki 浏览器端题面渲染。
+- `data/problems.json`：前后端共用的题目数据，前端导入，后端用于校验题号。
+- `backend/`：FastAPI 服务（`main.py`、`models.py`、`db.py`）与 pytest 测试。
 - `styles.css`：主题变量、业务版式与响应式样式。
 - `vendor/lako-ui-0.1.0.tgz`：锁定的本地 `@lako/ui` 依赖包。

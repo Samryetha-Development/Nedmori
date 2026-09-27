@@ -224,4 +224,4 @@ dist/
 coverage/
 
 # Local submission data
-backend/data/submissions.json
+backend/data/

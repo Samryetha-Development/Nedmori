@@ -1,3 +1,4 @@
+import problemData from '../data/problems.json' with { type: 'json' };
 export const icons = {
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
   moon: '<path d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5a8.5 8.5 0 1 0 9.7 9.7Z"/>',
@@ -27,24 +28,7 @@ export const icons = {
   reset: '<path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/>',
 };
 // All problems, contest schedules, user statistics and judged results below are demo fixtures.
-export const problems = [
-  {id:1001,title:'A + B Problem',level:'入门',tags:['基础','模拟'],rate:'92.6',sub:'12,846',status:'done',desc:'输入两个整数 a 和 b，计算它们的和。',input:'一行，包含两个整数 a 和 b，以空格分隔。',output:'输出一个整数，表示 a + b 的值。',sampleIn:'1 2',sampleOut:'3',constraints:'−10⁹ ≤ a, b ≤ 10⁹。'},
-  {id:1002,title:'最长上升子序列',level:'提高',tags:['动态规划','二分'],rate:'48.3',sub:'8,320',status:'attempted',desc:'给定一个长度为 n 的整数序列，求其中最长严格上升子序列的长度。子序列不必连续，但必须保持原序列中的相对顺序。',input:'第一行一个整数 n。第二行包含 n 个整数 a₁, a₂, …, aₙ。',output:'输出一个整数，表示最长严格上升子序列的长度。',sampleIn:'6\n3 1 2 1 8 5',sampleOut:'3',explain:'例如子序列 1, 2, 5 的长度为 3。',constraints:'1 ≤ n ≤ 100,000；−10⁹ ≤ aᵢ ≤ 10⁹。'},
-  {id:1003,title:'穿过迷雾的最短路',level:'普及',tags:['图论','广度优先搜索'],rate:'63.7',sub:'6,214',status:'',desc:'一张 n × m 的地图中，点号表示可通行的格子，井号表示障碍。你从左上角出发，每次可以向上下左右移动一格。求到达右下角的最少步数。',input:'第一行两个整数 n, m。接下来 n 行，每行一个长度为 m 的字符串，描述地图。起点与终点保证可通行。',output:'输出最少步数。如果无法到达，输出 -1。',sampleIn:'3 4\n....\n.##.\n....',sampleOut:'5',constraints:'1 ≤ n, m ≤ 1,000。'},
-  {id:1004,title:'区间的秘密',level:'普及',tags:['前缀和','数据结构'],rate:'71.2',sub:'5,906',status:'done',desc:'给定 n 个整数，以及 q 次区间查询。对于每次查询 [l, r]，计算序列中从第 l 项到第 r 项的和。',input:'第一行 n 和 q。第二行 n 个整数。之后 q 行，每行两个整数 l 和 r，下标从 1 开始。',output:'每次查询输出一行，包含对应区间的和。',sampleIn:'5 3\n1 3 2 4 5\n1 3\n2 5\n4 4',sampleOut:'6\n14\n4',constraints:'1 ≤ n, q ≤ 200,000；|aᵢ| ≤ 10⁹；1 ≤ l ≤ r ≤ n。'},
-  {id:1005,title:'背包里装着什么',level:'普及',tags:['动态规划','背包'],rate:'56.8',sub:'7,152',status:'',desc:'有 n 件物品和一个容量为 W 的背包。第 i 件物品的重量为 wᵢ，价值为 vᵢ。每件物品最多选一次，求不超过容量时能获得的最大总价值。',input:'第一行 n 和 W。之后 n 行，每行给出一件物品的重量和价值。',output:'输出可获得的最大总价值。',sampleIn:'3 5\n2 3\n3 4\n4 5',sampleOut:'7',constraints:'1 ≤ n ≤ 100；1 ≤ W ≤ 10,000；1 ≤ wᵢ, vᵢ ≤ 10,000。'},
-  {id:1006,title:'星空下的并查集',level:'提高',tags:['数据结构','并查集'],rate:'42.5',sub:'3,480',status:'',desc:'有 n 个星球，最初彼此不连通。依次处理两类操作：连接两个星球，或询问两个星球是否已经属于同一个连通块。',input:'第一行 n 和 m。之后 m 行，每行包含 op, a, b。op 为 1 表示连接，为 2 表示询问。',output:'对每个询问，如果连通输出 Yes，否则输出 No。',sampleIn:'4 4\n1 1 2\n2 1 3\n1 2 3\n2 1 3',sampleOut:'No\nYes',constraints:'1 ≤ n, m ≤ 200,000；1 ≤ a, b ≤ n。'},
-  {id:1007,title:'寻找第 k 小的数',level:'普及',tags:['排序','分治'],rate:'68.1',sub:'4,236',status:'',desc:'给定 n 个整数，把它们从小到大排列后，求第 k 个数。重复的数分别占据一个位置。',input:'第一行 n 和 k。第二行 n 个整数。',output:'输出第 k 小的数。',sampleIn:'5 3\n4 1 5 2 3',sampleOut:'3',constraints:'1 ≤ k ≤ n ≤ 100,000；|aᵢ| ≤ 10⁹。'},
-  {id:1008,title:'树上的旅人',level:'省选',tags:['树论','最近公共祖先'],rate:'31.4',sub:'2,187',status:'',desc:'给定一棵有 n 个节点的无向树，每条边的长度为 1。你需要回答 q 次询问，每次求两个节点之间的距离。',input:'第一行 n 和 q。之后 n − 1 行，每行两个整数表示一条边。接下来 q 行，每行两个节点编号 u, v。',output:'每次询问输出两个节点之间的距离。',sampleIn:'4 2\n1 2\n2 3\n2 4\n1 3\n3 4',sampleOut:'2\n2',constraints:'1 ≤ n, q ≤ 200,000；节点编号为 1 到 n。'},
-  {id:1009,title:'括号与平衡',level:'入门',tags:['栈','字符串'],rate:'83.2',sub:'3,956',status:'done',desc:'给定一个只包含左圆括号和右圆括号的字符串，判断它是否是合法的括号序列。空串是合法的；每个右括号都应与此前未匹配的左括号对应。',input:'一行一个非空字符串 s。',output:'合法输出 Yes，否则输出 No。',sampleIn:'(()())',sampleOut:'Yes',constraints:'1 ≤ |s| ≤ 100,000。'},
-  {id:1010,title:'城市之间',level:'提高',tags:['图论','最短路'],rate:'46.9',sub:'2,901',status:'',desc:'有 n 座城市和 m 条有向道路，每条道路有非负长度。求从 1 号城市到 n 号城市的最短距离。',input:'第一行 n 和 m。之后 m 行，每行 u, v, w 表示从 u 到 v 有一条长度为 w 的道路。',output:'输出最短距离。如果不可达，输出 -1。',sampleIn:'3 3\n1 2 2\n2 3 3\n1 3 8',sampleOut:'5',constraints:'1 ≤ n ≤ 100,000；0 ≤ m ≤ 200,000；0 ≤ w ≤ 10⁹。'},
-  {id:1011,title:'二分答案',level:'普及',tags:['二分','贪心'],rate:'59.4',sub:'2,748',status:'',desc:'有 n 段整数长度的木材。把它们切成相同整数长度的小段，剩余部分可以丢弃。要获得至少 k 段，求小段长度的最大值。',input:'第一行 n 和 k。第二行 n 个正整数，表示木材长度。',output:'输出最大整数长度。无法获得 k 段长度为 1 的木材时，输出 0。',sampleIn:'3 5\n8 7 6',sampleOut:'3',constraints:'1 ≤ n ≤ 100,000；1 ≤ k ≤ 10⁹；1 ≤ aᵢ ≤ 10⁹。'},
-  {id:1012,title:'字母的回声',level:'提高',tags:['字符串','KMP'],rate:'39.7',sub:'1,624',status:'',desc:'给定文本串 s 和模式串 t，求 t 在 s 中出现的次数。不同出现位置可以重叠。',input:'第一行为 s，第二行为 t，均只包含小写英文字母。',output:'输出出现次数。',sampleIn:'abababa\naba',sampleOut:'3',constraints:'1 ≤ |s|, |t| ≤ 1,000,000。'},
-  {id:1013,title:'斐波那契的问候',level:'入门',tags:['基础','递推'],rate:'86.4',sub:'5,072',status:'done',desc:'数列 F 满足 F₀ = 0，F₁ = 1，且 Fₙ = Fₙ₋₁ + Fₙ₋₂。给定 n，求 Fₙ 对 1,000,000,007 取模后的值。',input:'一个整数 n。',output:'输出 Fₙ 取模后的值。',sampleIn:'10',sampleOut:'55',constraints:'0 ≤ n ≤ 1,000,000。'},
-  {id:1014,title:'逆序的时间',level:'提高',tags:['排序','分治'],rate:'44.6',sub:'2,148',status:'',desc:'给定 n 个整数，求逆序对的数量。当 i < j 且 aᵢ > aⱼ 时，(i, j) 为一个逆序对。',input:'第一行 n。第二行 n 个整数。',output:'输出逆序对数量。',sampleIn:'5\n5 4 3 2 1',sampleOut:'10',constraints:'1 ≤ n ≤ 200,000；|aᵢ| ≤ 10⁹。'},
-  {id:1015,title:'连接所有岛屿',level:'提高',tags:['图论','最小生成树'],rate:'47.1',sub:'1,895',status:'',desc:'n 座岛屿之间有 m 座可建造的双向桥梁，每座桥梁都有费用。选择若干桥梁，使所有岛屿连通，求最小总费用。',input:'第一行 n 和 m。之后 m 行给出 u, v, w，表示连接 u 与 v 的费用。',output:'输出最小费用。如果无法连接全部岛屿，输出 -1。',sampleIn:'3 3\n1 2 2\n2 3 3\n1 3 7',sampleOut:'5',constraints:'1 ≤ n ≤ 100,000；0 ≤ m ≤ 200,000；1 ≤ w ≤ 10⁹。'},
-  {id:1016,title:'滑动的窗口',level:'省选',tags:['数据结构','单调队列'],rate:'34.8',sub:'1,462',status:'',desc:'长度为 k 的窗口从一个 n 项整数序列的最左侧开始，每次向右移动一项。按顺序输出每个窗口内的最大值。',input:'第一行 n 和 k。第二行 n 个整数。',output:'一行 n − k + 1 个整数，依次为各窗口的最大值。',sampleIn:'8 3\n1 3 -1 -3 5 3 6 7',sampleOut:'3 3 5 5 6 7',constraints:'1 ≤ k ≤ n ≤ 1,000,000；|aᵢ| ≤ 10⁹。'},
-];
+export const problems = problemData;
 export const contests = [
   {id:1,title:'Nedmori Weekly Contest #028',month:'09 月',day:'27',date:'2026.09.27 · 14:00 — 16:00',status:'即将开始',kind:'upcoming',type:'OI 赛制',count:5,level:'普及 → 提高',intro:'五道循序渐进的算法题，涵盖模拟、二分与动态规划。给自己两小时，专注解决问题。',ids:[1003,1005,1007,1011,1014]},
   {id:2,title:'秋日练习赛 · 从基础出发',month:'10 月',day:'01',date:'2026.10.01 · 09:00 — 12:00',status:'开放报名',kind:'upcoming',type:'ACM 赛制',count:4,level:'入门 → 普及',intro:'为刚刚开始算法学习的你准备。练习输入输出、基础数据结构和清晰的实现。',ids:[1001,1004,1009,1013]},
